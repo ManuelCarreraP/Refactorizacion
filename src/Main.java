@@ -5,6 +5,10 @@ public class Main {
     private static final int FORTY = 3;
     private static final int DEUCE_THRESHOLD = 4;
 
+    private static boolean isAdvantageOrWin(int player1Score, int player2Score) {
+        return player1Score >= DEUCE_THRESHOLD || player2Score >= DEUCE_THRESHOLD;
+    }
+
     public static String getScore(int player1Score, int player2Score) {
         String score = "";
         int tempScore = 0;
@@ -18,7 +22,7 @@ public class Main {
                 default: score = "Deuce"; break;
             }
         }
-        else if (player1Score >= DEUCE_THRESHOLD || player2Score >= DEUCE_THRESHOLD) {
+        else if (isAdvantageOrWin(player1Score, player2Score)) {
             int minusResult = player1Score - player2Score;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
