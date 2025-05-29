@@ -20,32 +20,29 @@ public class Main {
     }
 
     public static String getScore(int player1Score, int player2Score) {
-        String score = "";
-        int tempScore = 0;
+        StringBuilder scoreBuilder = new StringBuilder();
 
         if (player1Score == player2Score) {
             switch (player1Score) {
-                case LOVE: score = "Love-All"; break;
-                case FIFTEEN: score = "Fifteen-All"; break;
-                case THIRTY: score = "Thirty-All"; break;
-                case FORTY: score = "Forty-All"; break;
-                default: score = "Deuce"; break;
+                case LOVE: scoreBuilder.append("Love-All"); break;
+                case FIFTEEN: scoreBuilder.append("Fifteen-All"); break;
+                case THIRTY: scoreBuilder.append("Thirty-All"); break;
+                case FORTY: scoreBuilder.append("Forty-All"); break;
+                default: scoreBuilder.append("Deuce"); break;
             }
         }
         else if (isAdvantageOrWin(player1Score, player2Score)) {
             int minusResult = player1Score - player2Score;
-            if (minusResult == 1) score = "Advantage player1";
-            else if (minusResult == -1) score = "Advantage player2";
-            else if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
+            if (minusResult == 1) scoreBuilder.append("Advantage player1");
+            else if (minusResult == -1) scoreBuilder.append("Advantage player2");
+            else if (minusResult >= 2) scoreBuilder.append("Win for player1");
+            else scoreBuilder.append("Win for player2");
         }
         else {
-            for (int i = 1; i < 3; i++) {
-                if (i == 1) tempScore = player1Score;
-                else { score += "-"; tempScore = player2Score; }
-                score += getScoreName(tempScore);
-            }
+            scoreBuilder.append(getScoreName(player1Score))
+                    .append("-")
+                    .append(getScoreName(player2Score));
         }
-        return score;
+        return scoreBuilder.toString();
     }
 }
