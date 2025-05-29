@@ -284,3 +284,72 @@ Podemos seleccionar diferentes elementos para mostrar su menú de refactorizaci�
 
 ----
 <sub>[(*artículo original*)](https://entornos.abrilcode.com/doku.php?id=apuntes:refactorizacion)</sub>
+
+
+## Refactorizaciones Realizadas en el Código de Tenis
+
+### 1. Renombrado de Variables
+**Problema**: Los nombres de variables `m_score1` y `m_score2` no seguían las convenciones de Java (lowerCamelCase) y no eran descriptivos.  
+**Cambio**:
+```java
+// Antes
+int m_score1, m_score2;
+
+// Después
+int player1Score, player2Score;
+```
+Impacto: Mejora la legibilidad del código al seguir las convenciones de nomenclatura de Java y usar nombres más expresivos.
+
+### 2. Extracción de Constantes
+**Problema**: Uso de "magic numbers" (0, 1, 2, 3, 4) en el código.  
+**Cambio**:
+
+```java
+private static final int LOVE = 0;
+private static final int FIFTEEN = 1;
+private static final int THIRTY = 2;
+private static final int FORTY = 3;
+private static final int DEUCE_THRESHOLD = 4;
+```
+Impacto: Elimina números mágicos, facilita la comprensión del código y centraliza los valores significativos en constantes reutilizables.
+
+### 3. Extracción del Método isAdvantageOrWin
+**Problema**: Condicional complejo y repetido para detectar ventaja o victoria.  
+**Cambio**:
+
+```java
+private static boolean isAdvantageOrWin(int player1Score, int player2Score) {
+    return player1Score >= DEUCE_THRESHOLD || player2Score >= DEUCE_THRESHOLD;
+}
+```
+Impacto: Reduce la complejidad en el cuerpo principal del método, mejora la legibilidad y favorece la reutilización.
+
+### 4. Extracción del Método getScoreName
+**Problema**: Lógica duplicada para convertir puntuaciones numéricas en texto.  
+**Cambio**:
+
+```java
+private static String getScoreName(int score) {
+    switch(score) {
+        case LOVE: return "Love";
+        case FIFTEEN: return "Fifteen";
+        case THIRTY: return "Thirty";
+        case FORTY: return "Forty";
+        default: return "";
+    }
+}
+```
+Impacto: Elimina la duplicación de código, facilita futuras modificaciones y mejora la claridad general.
+
+### 5. Uso de StringBuilder
+**Problema**: Concatenación ineficiente de cadenas con operador +, especialmente dentro de bucles o múltiples pasos.  
+**Cambio**:
+```java
+StringBuilder scoreBuilder = new StringBuilder();
+scoreBuilder.append(getScoreName(player1Score))
+            .append("-")
+            .append(getScoreName(player2Score));
+return scoreBuilder.toString();
+```
+Impacto: Mejora el rendimiento y eficiencia en la manipulación de cadenas, especialmente en escenarios donde la concatenación es intensiva.
+
