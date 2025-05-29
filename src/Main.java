@@ -9,6 +9,16 @@ public class Main {
         return player1Score >= DEUCE_THRESHOLD || player2Score >= DEUCE_THRESHOLD;
     }
 
+    private static String getScoreName(int score) {
+        switch(score) {
+            case LOVE: return "Love";
+            case FIFTEEN: return "Fifteen";
+            case THIRTY: return "Thirty";
+            case FORTY: return "Forty";
+            default: return "";
+        }
+    }
+
     public static String getScore(int player1Score, int player2Score) {
         String score = "";
         int tempScore = 0;
@@ -33,12 +43,7 @@ public class Main {
             for (int i = 1; i < 3; i++) {
                 if (i == 1) tempScore = player1Score;
                 else { score += "-"; tempScore = player2Score; }
-                switch(tempScore) {
-                    case LOVE: score += "Love"; break;
-                    case FIFTEEN: score += "Fifteen"; break;
-                    case THIRTY: score += "Thirty"; break;
-                    case FORTY: score += "Forty"; break;
-                }
+                score += getScoreName(tempScore);
             }
         }
         return score;
