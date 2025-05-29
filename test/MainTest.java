@@ -29,6 +29,16 @@ public class MainTest {
     }
 
     @Test
+    public void deuceAtFiveFive() {
+        Assertions.assertEquals("Deuce", Main.getScore(5, 5));
+    }
+
+    @Test
+    public void deuceAtSixSix() {
+        Assertions.assertEquals("Deuce", Main.getScore(6, 6));
+    }
+
+    @Test
     public void playerOneHasAdvantage() {
         Assertions.assertEquals("Advantage player1", Main.getScore(5, 4));
     }
@@ -39,6 +49,16 @@ public class MainTest {
     }
 
     @Test
+    public void playerOneHasAdvantageAtSevenSix() {
+        Assertions.assertEquals("Advantage player1", Main.getScore(7, 6));
+    }
+
+    @Test
+    public void playerTwoHasAdvantageAtEightNine() {
+        Assertions.assertEquals("Advantage player2", Main.getScore(8, 9));
+    }
+
+    @Test
     public void playerOneWins() {
         Assertions.assertEquals("Win for player1", Main.getScore(6, 4));
     }
@@ -46,6 +66,16 @@ public class MainTest {
     @Test
     public void playerTwoWins() {
         Assertions.assertEquals("Win for player2", Main.getScore(4, 6));
+    }
+
+    @Test
+    public void playerOneWinsAfterExtendedPlay() {
+        Assertions.assertEquals("Win for player1", Main.getScore(10, 8));
+    }
+
+    @Test
+    public void playerTwoWinsAfterExtendedPlay() {
+        Assertions.assertEquals("Win for player2", Main.getScore(10, 12));
     }
 
     @Test
@@ -61,5 +91,15 @@ public class MainTest {
     @Test
     public void playerOneScoresFortyPlayerTwoScoresThirty() {
         Assertions.assertEquals("Forty-Thirty", Main.getScore(3, 2));
+    }
+
+    @Test
+    public void playerOneLovePlayerTwoFifteen() {
+        Assertions.assertEquals("Love-Fifteen", Main.getScore(0, 1));
+    }
+
+    @Test
+    public void playerOneThirtyPlayerTwoLove() {
+        Assertions.assertEquals("Thirty-Love", Main.getScore(2, 0));
     }
 }
